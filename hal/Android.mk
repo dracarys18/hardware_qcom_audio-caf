@@ -437,6 +437,14 @@ ifeq ($(strip $(AUDIO_FEATURE_ENABLED_SND_MONITOR)), true)
     LOCAL_SRC_FILES += audio_extn/sndmonitor.c
 endif
 
+ifeq ($(strip $(AUDIO_FEATURE_ENABLED_PERF_HINTS)), true)
+LOCAL_SHARED_LIBRARIES += libbase libhidlbase libhwbinder libutils android.hardware.power@1.2 liblog
+LOCAL_SRC_FILES += audio_perf.cpp
+LOCAL_CFLAGS += -DPERF_HINTS_ENABLED
+endif
+
+LOCAL_HEADER_LIBRARIES += libhardware_headers
+
 LOCAL_MODULE := audio.primary.$(TARGET_BOARD_PLATFORM)
 
 LOCAL_MODULE_RELATIVE_PATH := hw
